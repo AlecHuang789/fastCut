@@ -1,0 +1,48 @@
+<template>
+  <style>
+    {{FONT_FACE}}
+    #root { position: absolute; inset: 0; }
+    #title-card {
+      position: absolute;
+      left: 12%;
+      right: 12%;
+      top: {{TITLE_TOP}};
+      text-align: center;
+    }
+    #title-card-inner {
+      display: inline-block;
+      max-width: 100%;
+      padding: 0;
+      background: none;
+    }
+    h1 {
+      font-family: CaptionCN, "Noto Sans JP", sans-serif;
+      font-weight: 700;
+      font-size: {{TITLE_SIZE}}px;
+      line-height: 1.28;
+      color: #ffffff;
+      margin: 0;
+      text-shadow: 0 3px 2px rgba(0, 0, 0, 0.9), 0 0 16px rgba(0, 0, 0, 0.55);
+    }
+  </style>
+  <div id="root" data-composition-id="title" data-width="{{WIDTH}}" data-height="{{HEIGHT}}">
+    <div id="title-card" class="clip" data-start="{{TITLE_START}}" data-duration="{{TITLE_CLIP}}" data-track-index="1">
+      <div id="title-card-inner">
+        <h1>{{TITLE}}</h1>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo(
+      "#title-card-inner",
+      { opacity: 0, y: 22 },
+      { opacity: 1, y: 0, duration: 0.32, ease: "power3.out" },
+      {{TITLE_IN}}
+    );
+    tl.to("#title-card-inner", { opacity: 0, duration: 0.2, ease: "power2.in" }, {{TITLE_OUT}});
+    window.__timelines = window.__timelines || {};
+    window.__timelines["title"] = tl;
+  </script>
+</template>

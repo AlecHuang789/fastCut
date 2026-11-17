@@ -1,0 +1,51 @@
+<template>
+  <style>
+    {{FONT_FACE}}
+    #root { position: absolute; inset: 0; overflow: visible; }
+    .clip {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      bottom: {{CAPTION_BOTTOM}};
+      text-align: center;
+      overflow: visible;
+    }
+    .line {
+      display: block;
+      width: 100%;
+      padding: 0;
+      background: none;
+    }
+    .slant {
+      display: inline-block;
+      max-width: 100%;
+      transform: skewX(-12deg);
+      font-family: CaptionCN, "Noto Sans JP", sans-serif;
+      font-weight: 800;
+      font-style: italic;
+      font-size: {{CAPTION_SIZE}}px;
+      line-height: 1.28;
+      color: #ffffff;
+      background: none;
+      text-shadow: 0 2px 2px rgba(0, 0, 0, 0.92), 0 0 10px rgba(0, 0, 0, 0.55);
+    }
+    .word {
+      display: inline;
+      font: inherit;
+      color: inherit;
+      margin: 0;
+      text-shadow: inherit;
+    }
+    .word.emph { color: #ffe56a; }
+  </style>
+  <div id="root" data-composition-id="captions" data-width="{{WIDTH}}" data-height="{{HEIGHT}}" data-layout-allow-overflow>
+    {{CAPTION_BLOCKS}}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    {{CAPTION_TWEENS}}
+    window.__timelines = window.__timelines || {};
+    window.__timelines["captions"] = tl;
+  </script>
+</template>
